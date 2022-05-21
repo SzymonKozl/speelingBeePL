@@ -1,0 +1,22 @@
+{
+  "must_contain_pangram": true,
+  "minimal_guess_length": 4,
+  "custom_rewards": {
+    "4": 1,
+    "7": 14
+  },
+  "letter_groups": {
+    "vowels_1": ["a", "e", "i", "o"],
+    "vowels_2": ["ó", "u", "y"],
+    "consonants_1": ["z", "n", "c", "d", "k", "p", "r", "s", "t", "w"],
+    "consonants_2": ["b", "f", "g", "h", "j", "l", "ł", "m"],
+    "rare": ["ą", "ć", "ę", "ń", "q", "ś", "v", "x", "ź", "ż"]
+  },
+  "ranks": {
+    "początkujący": 0.0,
+    "odkrywca": 0.2,
+    "średniozaawansowany": 0.4,
+    "ekspert": 0.6,
+    "królowa pszczół": 0.8
+  }
+}
