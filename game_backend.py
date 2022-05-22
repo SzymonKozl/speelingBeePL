@@ -15,18 +15,32 @@ def load_rules_config(path: str = 'rules.json') -> dict:
         return json.load(f)
 
 
-def filter_words(letters: Set[str], central_letter: str, path: str = 'words.txt') -> List[str]:
+def filter_words(letters: Set[str], central_letter: str, rules: dict, path: str = 'words.txt') -> List[str]:
     final_list = []
     with open(path, 'r', encoding='ANSI') as f_in:
         for line in f_in.readlines():
             w = line[:-1] if line.endswith('\n') else line
-            if central_letter in w and set(w).issubset(letters):
+            if central_letter in w and set(w).issubset(letters) and len(w) >= rules["minimal_guess_length"]:
                 final_list.append(w)
     return final_list
 
 
+def make_game_data(letters: List[str], central_letter: str, rules: dict) -> dict:
+    words = filter_words(set(letters), central_letter, rules)
+    letters.remove(central_letter)
+    game_data = {
+        "game_data": {
+            "central_letter": central_letter,
+            "letters": letters,
+            "words": [sha256(bytearray(w, 'utf-8')).hexdigest() for w in words]
+        },
+        "rules": rules
+    }
+    game_data["game_data"]["max_points"] = calc_max_points(words, game_data)
+    return game_data
+
+
 def initialize_game_random(rules: dict) -> dict:
-    game_data = {}
     v1 = rules["letter_groups"]["vowels_1"][:]
     v2 = rules["letter_groups"]["vowels_2"][:]
     c1 = rules["letter_groups"]["consonants_1"][:]
@@ -42,13 +56,10 @@ def initialize_game_random(rules: dict) -> dict:
     while cl not in rules["letter_groups"]["vowels_1"] and cl not in \
             rules["letter_groups"]["consonants_1"]:
         cl = choice(letters)
-    game_data["central_letter"] = cl
-    game_data["letters"] = letters
-    game_data["words"] = [sha256(w).hexdigest() for w in filter_words(set(letters), cl)]
-    return game_data
+    return make_game_data(letters, cl, rules)
 
 
-def initialize_game_random_pangram(rules: dict, pangrams_path: str = "pangrams_rare.txt"):
+def initialize_game_random_pangram(rules: dict, pangrams_path: str = "pangrams_rare.txt") -> dict:
     central_candidates = set(rules["letter_groups"]["vowels_1"] + rules["letter_groups"]["consonants_1"])
     with open(pangrams_path, 'r') as pangrams:
         w = [p[:-1] if p.endswith('\n') else p for p in pangrams]
@@ -60,18 +71,14 @@ def initialize_game_random_pangram(rules: dict, pangrams_path: str = "pangrams_r
         candidates = letters.intersection(central_candidates)
         if len(candidates) > 0:
             central_letter = random.choice(list(candidates))
-    words = filter_words(set(letters), central_letter)
-    game_context = {
-        "central_letter": central_letter,
-        "letters": list(letters),
-        "words": [sha256(bytearray(w, 'utf-8')).hexdigest() for w in words]
-    }
-    game_data = {
-        "game_data": game_context,
-        "rules": rules
-    }
-    game_data["game_data"]["max_points"] = calc_max_points(words, game_data)
-    return game_data
+    return make_game_data(list(letters), central_letter, rules)
+
+
+def initialize_game_custom(rules: dict) -> dict:
+    letters = rules["fixed_letters_config"]["letters"]
+    cl = rules["fixed_letters_config"]["central_letter"]
+    return make_game_data(letters + [cl], cl, rules)
+
 
 def value_word(word: str, game_data: dict) -> int:
     """

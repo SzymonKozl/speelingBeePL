@@ -7,6 +7,8 @@ let currentGuess = "";
 const ranks = new Map();
 let rank = 1;
 let rankDesc = "";
+let _gameData;
+
 document.onkeydown = function (e) {
     if (e.key === "Enter") handleGuess();
     else if (e.key === "Backspace") delChar();
@@ -20,9 +22,9 @@ function initialize() {
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "/secret_words/", false); // false for synchronous request
     xmlHttp.send(null);
-    const jsonObj = JSON.parse(xmlHttp.responseText);
-    const letters_temp = jsonObj["game_data"]["letters"];
-    centralLetter = jsonObj["game_data"]["central_letter"];
+    _gameData = JSON.parse(xmlHttp.responseText);
+    const letters_temp = _gameData["game_data"]["letters"];
+    centralLetter = _gameData["game_data"]["central_letter"];
     document.getElementById("letter_slot_7").innerText = centralLetter;
     let slot = 1;
     for (i in letters_temp) {
@@ -32,10 +34,10 @@ function initialize() {
             slot++;
         }
     }
-    const maxPoints = jsonObj["game_data"]["max_points"];
-    _allWords = jsonObj["game_data"]["words"]
-    for (const rank_t in jsonObj.rules["ranks"]) {
-        ranks.set(rank_t, Math.round(jsonObj.rules["ranks"][rank_t] * maxPoints));
+    const maxPoints = _gameData["game_data"]["max_points"];
+    _allWords = _gameData["game_data"]["words"]
+    for (const rank_t in _gameData.rules["ranks"]) {
+        ranks.set(rank_t, Math.round(_gameData["rules"]["ranks"][rank_t] * maxPoints));
     }
     loadGame();
     evaluateRank();
@@ -64,12 +66,12 @@ function clickHex(num) {
 function reward(word) {
     return sha256(word).then(
         function (hash) {
-            console.log("hash for word " + word + " is " + hash)
-            console.log(!(_allWords.includes(hash)) + " " + discovered.includes(word))
             if (!(_allWords.includes(hash)) || discovered.includes(word)) return 0;
-            if (new Set(word).size === 7) return 7 + word.length;
-            if (word.length === 4) return 1;
-            return word.length;
+            let r;
+            if (_gameData["rules"]["custom_rewards"][word.length.toString()] !== undefined) r = _gameData["rules"]["custom_rewards"][word.length.toString()];
+            else r = word.length;
+            if (new Set(word).length === 7) r += 7;
+            return r;
         }
     );
 }
@@ -78,14 +80,13 @@ function handleGuess() {
     const word = document.getElementById("new_word").innerText;
     reward(word).then(
         function (r) {
-            console.log("reward for word " + word + " is " + r)
             if (r !== 0) {
                 discovered.push(word);
                 points += r;
             } else {
                 if (discovered.includes(word)) displayPopup("słowo już odkryte");
                 else if (!currentGuess.includes(centralLetter)) displayPopup("brakuje centralnej litery");
-                else if (currentGuess.length < 4) displayPopup("słowo zbyt krótkie");
+                else if (currentGuess.length < _gameData["rules"]["minimal_guess_length"]) displayPopup("słowo zbyt krótkie");
                 else displayPopup("słowa nie ma na liście");
             }
             saveScore();

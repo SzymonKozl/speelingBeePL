@@ -1,16 +1,66 @@
 {
-  "must_contain_pangram": true,
+  "mode": 0,
+  "fixed_letters_config": {
+    "letters": [
+      "s",
+      "e",
+      "c",
+      "a",
+      "t",
+      "n"
+    ],
+    "central_letter": "p"
+  },
   "minimal_guess_length": 4,
   "custom_rewards": {
-    "4": 1,
-    "7": 14
+    "4": 1
   },
   "letter_groups": {
-    "vowels_1": ["a", "e", "i", "o"],
-    "vowels_2": ["ó", "u", "y"],
-    "consonants_1": ["z", "n", "c", "d", "k", "p", "r", "s", "t", "w"],
-    "consonants_2": ["b", "f", "g", "h", "j", "l", "ł", "m"],
-    "rare": ["ą", "ć", "ę", "ń", "q", "ś", "v", "x", "ź", "ż"]
+    "vowels_1": [
+      "a",
+      "e",
+      "i",
+      "o"
+    ],
+    "vowels_2": [
+      "ó",
+      "u",
+      "y"
+    ],
+    "consonants_1": [
+      "z",
+      "n",
+      "c",
+      "d",
+      "k",
+      "p",
+      "r",
+      "s",
+      "t",
+      "w"
+    ],
+    "consonants_2": [
+      "b",
+      "f",
+      "g",
+      "h",
+      "j",
+      "l",
+      "ł",
+      "m"
+    ],
+    "rare": [
+      "ą",
+      "ć",
+      "ę",
+      "ń",
+      "q",
+      "ś",
+      "v",
+      "x",
+      "ź",
+      "ż"
+    ]
   },
   "ranks": {
     "początkujący": 0.0,
