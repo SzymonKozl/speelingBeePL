@@ -2,22 +2,18 @@ import json
 
 from flask import Flask, render_template
 
-from game_backend import load_rules_config, initialize_game_random_pangram, initialize_game_random, \
-    initialize_game_custom
+from game_backend import prepare_game_data
+
+
+# some constants
+WORDBASE_PATH = 'words.txt'
+WB_METADATA_PATH = 'wordbase_metadata.json'
+RULES_PATH = 'rules.json'
+PANGRAMS_PATH = 'pangrams_rare.txt'
 
 app = Flask(__name__)
 
-rules = load_rules_config()
-match rules["mode"]:
-    case 0:
-        game_data = initialize_game_random_pangram(rules)
-    case 1:
-        game_data = initialize_game_random(rules)
-    case 2:
-        game_data = initialize_game_custom(rules)
-    case _ as x:
-        raise ValueError(
-            f"invalid value of \"mode\" field in rules.json (Value is set to {x}, should be 0, 1 or 2)")
+game_data = prepare_game_data(RULES_PATH, WB_METADATA_PATH, WORDBASE_PATH, pangrams_path=PANGRAMS_PATH)
 
 
 @app.route('/')

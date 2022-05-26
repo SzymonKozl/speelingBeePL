@@ -1,6 +1,6 @@
 # NYT Spelling Bee clone with Polish words.
 
-* customizable rules (under development)
+* customizable rules
 * over 600k words
 
 ## Basics

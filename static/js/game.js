@@ -15,9 +15,9 @@ document.onkeydown = function (e) {
     else if (letters.includes(e.key)) clickHex(letters.indexOf(e.key) + 1);
     else if (e.key === centralLetter) clickHex(7);
 }
-document.getElementById("date_today").innerText = new Date(Date.now()).toLocaleDateString();
 
 function initialize() {
+    document.getElementById("date_today").innerText = new Date(Date.now()).toLocaleDateString();
     let i;
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "/secret_words/", false); // false for synchronous request
@@ -55,12 +55,15 @@ async function scheduleTask(callable, delay = 1000) {
 }
 
 function clickHex(num) {
-    if (num === 7) {
-        currentGuess += centralLetter;
-    } else {
-        currentGuess += letters[num - 1];
+    if (currentGuess.length === _gameData['wb_meta']['max_length']) displayMiddlePopup("maksymalna długość słowa");
+    else {
+        if (num === 7) {
+            currentGuess += centralLetter;
+        } else {
+            currentGuess += letters[num - 1];
+        }
+        updateGuess();
     }
-    updateGuess();
 }
 
 function reward(word) {
@@ -70,7 +73,7 @@ function reward(word) {
             let r;
             if (_gameData["rules"]["custom_rewards"][word.length.toString()] !== undefined) r = _gameData["rules"]["custom_rewards"][word.length.toString()];
             else r = word.length;
-            if (new Set(word).length === 7) r += 7;
+            if ((new Set(word)).size === 7) r += 7;
             return r;
         }
     );
@@ -80,14 +83,14 @@ function handleGuess() {
     const word = document.getElementById("new_word").innerText;
     reward(word).then(
         function (r) {
-            if (r !== 0) {
+            if (parseInt(r) !== 0) {
                 discovered.push(word);
                 points += r;
             } else {
-                if (discovered.includes(word)) displayPopup("słowo już odkryte");
-                else if (!currentGuess.includes(centralLetter)) displayPopup("brakuje centralnej litery");
-                else if (currentGuess.length < _gameData["rules"]["minimal_guess_length"]) displayPopup("słowo zbyt krótkie");
-                else displayPopup("słowa nie ma na liście");
+                if (discovered.includes(word)) displayMiddlePopup("słowo już odkryte");
+                else if (!currentGuess.includes(centralLetter)) displayMiddlePopup("brakuje centralnej litery");
+                else if (currentGuess.length < _gameData["rules"]["minimal_guess_length"]) displayMiddlePopup("słowo zbyt krótkie");
+                else displayMiddlePopup("słowa nie ma na liście");
             }
             saveScore();
             evaluateRank();
@@ -103,16 +106,9 @@ function delChar() {
     updateGuess(currentGuess.substr(0, currentGuess.length - 1));
 }
 
-function displayPopup(content, force = false) {
-    if ("popupAnimation" in document.getElementById("mistake_popup").classList) {
-        if (!force) return;
-        document.getElementById("mistake_popup").classList.remove("popupAnimation");
-    }
+function displayMiddlePopup(content) {
     document.getElementById("mistake_popup").innerText = content;
-    document.getElementById("mistake_popup").classList.add("popupAnimation");
-    scheduleTask(() => {
-        document.getElementById("mistake_popup").classList.remove("popupAnimation");
-    }, 4000);
+    playCSSAnimation("mistake_popup", "animHoldMiddlePopup", true);
 }
 
 function updateRankFrame() {
@@ -146,14 +142,19 @@ function saveScore() {
 }
 
 function loadGame() {
-    if (document.cookie.includes("gameData")) {
-        const separated = document.cookie.split("=");
-        const data = JSON.parse(separated[1]);
+    const cookies = Object.assign({}, ...document.cookie.split('; ').map((entry) => ({
+        [entry.split('=')[0]]: entry.split('=')[1]
+    })))
+    if (cookies['gameData'] !== undefined) {
+        const data = JSON.parse(cookies['gameData']);
         discovered = data.words;
         points = data.score;
         evaluateRank();
         updateRankFrame();
         updateWordList();
+    }
+    if (cookies['cookies'] === undefined) {
+        playCSSAnimation("bottom_popup", "animHoldPopupBottomShow")
     }
 }
 
@@ -179,6 +180,32 @@ function openInfoPopup() {
 function closeInfoPopup() {
     document.getElementById("info_popup").style.display = "none";
     document.getElementById("info_popup_shadow").style.display = "none";
+}
+
+function playCSSAnimation(objectID, CSSAnimationName, removeClass = false) {
+    // plays CSS keyframes animation by adding CSS class
+    let obj = document.getElementById(objectID)
+    // removing previous animations
+    let to_remove = [...obj.classList].filter((name) => name.startsWith("animHold"));
+    if (to_remove.length > 0) obj.classList.remove(to_remove);
+    obj.classList.add(CSSAnimationName);
+    let duration = getComputedStyle(obj).animationDuration;
+    duration = parseFloat(duration) * 1000;
+    if (removeClass) {
+        scheduleTask(
+            () => {
+                obj.classList.remove(CSSAnimationName);
+            }, duration
+        );
+    }
+}
+
+function acceptCookies() {
+    const jsonObj = {};
+    jsonObj["accepted_cookies"] = true;
+    const expirationDate = new Date(2200, 1, 1);
+    document.cookie = "cookies=" + JSON.stringify(jsonObj) + "; expires=" + expirationDate;
+    playCSSAnimation("bottom_popup", "animHoldPopupBottomHide")
 }
 
 

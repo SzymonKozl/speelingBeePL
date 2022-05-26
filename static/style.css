@@ -1,9 +1,10 @@
-div {
-    height: 100px;
-    width: 100px;
-}
+/* Naming conventions:
+classes used for applying animation should have names starting with "animHold" prefix
+*/
 
 .hex_black {
+    height: 100px;
+    width: 100px;
     background: black;
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
@@ -11,6 +12,8 @@ div {
 }
 
 .hex_yellow_2 {
+    height: 100px;
+    width: 100px;
     background: yellow;
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
@@ -45,6 +48,7 @@ div {
     left: -11vw;
     border: 0;
     border-radius: 10px;
+    height: 100px;
 }
 
 .button {
@@ -87,10 +91,11 @@ div {
     }
 }
 
-.popupAnimation {
+.animHoldMiddlePopup {
     animation-duration: 3s;
     animation-name: appear;
     animation-delay: 0s;
+    animation-fill-mode: forwards;
 }
 
 .ranksFrame {
@@ -140,7 +145,7 @@ div {
     padding: 10%;
 }
 
-.infoPopupCloseButton {
+.popupCloseButton {
     width: 30px;
     height: 30px;
     font-family: Consolas, serif;
@@ -177,7 +182,7 @@ div {
     left: 95vw;
 }
 
-.infoPopupShadow {
+.popupShadow {
     width: 100vw;
     height: 100vh;
     opacity: 0.5;
@@ -194,4 +199,59 @@ div {
     -khtml-user-select: auto;
     -moz-user-select: auto;
     -ms-user-select: auto;
+}
+
+.popupBottom {
+    width: 100vw;
+    height: 50px;
+    left: 0;
+    bottom: -65px;
+    background: gray;
+    position: absolute;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+@keyframes showBottomPopup {
+    from {
+        bottom: -65px;
+    }
+    to {
+        bottom: 0;
+    }
+}
+
+@keyframes hideBottomPopup {
+    from {
+        bottom: 0;
+    }
+    to {
+        bottom: -65px;
+    }
+}
+
+.animHoldPopupBottomShow{
+    animation-duration: 0.75s;
+    animation-name: showBottomPopup;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.animHoldPopupBottomHide{
+    animation-duration: 0.75s;
+    animation-name: hideBottomPopup;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    font-size: 30px;
+    background: bisque;
+    font-family: 'Franklin Gothic Heavy',serif;
+    margin: 0;
+    overflow-y: hidden;
 }
