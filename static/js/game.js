@@ -10,10 +10,11 @@ let rankDesc = "";
 let _gameData;
 
 document.onkeydown = function (e) {
+    let keyLower = e.key.toLowerCase();
     if (e.key === "Enter") handleGuess();
     else if (e.key === "Backspace") delChar();
-    else if (letters.includes(e.key)) clickHex(letters.indexOf(e.key) + 1);
-    else if (e.key === centralLetter) clickHex(7);
+    else if (letters.includes(keyLower)) clickHex(letters.indexOf(keyLower) + 1);
+    else if (keyLower === centralLetter) clickHex(7);
 }
 
 function initialize() {
@@ -25,12 +26,12 @@ function initialize() {
     _gameData = JSON.parse(xmlHttp.responseText);
     const letters_temp = _gameData["game_data"]["letters"];
     centralLetter = _gameData["game_data"]["central_letter"];
-    document.getElementById("letter_slot_7").innerText = centralLetter;
+    document.getElementById("letter_slot_7").innerText = centralLetter.toUpperCase();
     let slot = 1;
     for (i in letters_temp) {
         if (letters_temp[i] !== centralLetter) {
             letters.push(letters_temp[i])
-            document.getElementById("letter_slot_" + slot).innerText = letters_temp[i];
+            document.getElementById("letter_slot_" + slot).innerText = letters_temp[i].toUpperCase();
             slot++;
         }
     }
@@ -46,7 +47,7 @@ function initialize() {
 
 function updateGuess(new_guess = currentGuess) {
     currentGuess = new_guess;
-    document.getElementById("new_word").innerText = currentGuess;
+    document.getElementById("new_word").innerText = currentGuess.toUpperCase();
 }
 
 async function scheduleTask(callable, delay = 1000) {
@@ -80,7 +81,7 @@ function reward(word) {
 }
 
 function handleGuess() {
-    const word = document.getElementById("new_word").innerText;
+    const word = currentGuess;
     reward(word).then(
         function (r) {
             if (parseInt(r) !== 0) {
@@ -114,10 +115,10 @@ function displayMiddlePopup(content) {
 function updateRankFrame() {
     for (let i = 1; i <= 5; i++) {
         if (i <= rank) document.getElementById("rank_dot_" + i).style.background = "black";
-        else document.getElementById("rank_dot_" + i).style.background = "bisque";
+        else document.getElementById("rank_dot_" + i).style.background = "#f2f3f2";
         document.getElementById("rank_label").style.top = (-32 + rank * 50) + "px";
         document.getElementById("rank_label").innerText = rankDesc;
-        document.getElementById("counter").innerText = "Punkty: " + points;
+        document.getElementById("counter").innerText = "PUNKTY: " + points;
     }
 }
 
@@ -170,6 +171,8 @@ function updateWordList() {
         }
         t.rows[t.rows.length - 1].cells[i % 3].innerHTML = discovered[i];
     }
+    let cont = document.getElementById("discovered_words_container");
+    cont.scrollTop = cont.scrollHeight;
 }
 
 function openInfoPopup() {

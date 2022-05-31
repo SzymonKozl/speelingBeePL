@@ -9,15 +9,20 @@ classes used for applying animation should have names starting with "animHold" p
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     position: inherit;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 20%;
 }
 
-.hex_yellow_2 {
+.hex_yellow {
     height: 100px;
     width: 100px;
-    background: yellow;
+    background: #ffcf00;
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     position: inherit;
+    left: 50%;
+    top: 20%;
 }
 
 .buttonLetter {
@@ -32,6 +37,9 @@ classes used for applying animation should have names starting with "animHold" p
     font-size: 40px;
     width: 50px;
     height: 50px;
+    top: 25px;
+    left: 25px;
+    font-family: cocogoose1, sans-serif;
 }
 
 .discoveredWords {
@@ -45,10 +53,13 @@ classes used for applying animation should have names starting with "animHold" p
     top: 50vh;
     font-size: 20px;
     width: 30vw;
-    left: -11vw;
+    transform: translateX(-50%);
+    left: 50%;
     border: 0;
     border-radius: 10px;
-    height: 100px;
+    height: 15vh;
+    min-height: 100px;
+    min-width: 400px;
 }
 
 .button {
@@ -59,31 +70,32 @@ classes used for applying animation should have names starting with "animHold" p
     font-size: 19px;
     width: 150px;
     height: 75px;
-    font-family: 'Franklin Gothic Heavy', serif;
+    font-family: 'Consolas', serif;
     border: 0;
+    left: 50%
 }
-
 
 .popup {
     font-size: 25px;
-    font-family: "Franklin Gothic Medium", serif;
+    font-family: Consolas, serif;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
     width: 20vw;
     height: fit-content;
-    border-radius: 10px;
+    border-radius: 5px;
     position: inherit;
-    left: -7vw;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 @keyframes appear {
     0% {
         opacity: 0
     }
-    25% {
+    20% {
         opacity: 1
     }
-    75% {
+    80% {
         opacity: 1
     }
     100% {
@@ -92,7 +104,7 @@ classes used for applying animation should have names starting with "animHold" p
 }
 
 .animHoldMiddlePopup {
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-name: appear;
     animation-delay: 0s;
     animation-fill-mode: forwards;
@@ -109,7 +121,7 @@ classes used for applying animation should have names starting with "animHold" p
     position: inherit;
     border-radius: 50%;
     border: 5px solid black;
-    background: bisque;
+    background: #f2f3f2;
     width: 15px;
     height: 15px;
 }
@@ -123,7 +135,7 @@ classes used for applying animation should have names starting with "animHold" p
 }
 
 .rankLabel {
-    font-family: "Franklin Gothic Medium", serif;
+    font-family: "Consolas", serif;
     font-size: 25px;
     position: inherit;
 }
@@ -135,14 +147,23 @@ classes used for applying animation should have names starting with "animHold" p
     position: absolute;
     top: 5vh;
     left: 5vw;
-    background: yellow;
+    background: #ffcf00;
     border-radius: 5vh;
-    font-family: "Franklin Gothic Medium", serif;
+    font-family: "Consolas", serif;
     font-size: 30px;
     display: None;
     z-index: 100;
     text-align: center;
     padding: 10%;
+}
+
+.infoPopupText{
+    position: inherit;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+    height: fit-content;
 }
 
 .popupCloseButton {
@@ -170,7 +191,7 @@ classes used for applying animation should have names starting with "animHold" p
     font-weight: bolder;
     color: black;
     border-radius: 50%;
-    background: yellow;
+    background: #ffcf00;
     cursor: pointer;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -178,7 +199,7 @@ classes used for applying animation should have names starting with "animHold" p
     -moz-user-select: none;
     -ms-user-select: none;
     position: absolute;
-    top: 2vh;
+    top: 10px;
     left: 95vw;
 }
 
@@ -244,14 +265,30 @@ classes used for applying animation should have names starting with "animHold" p
     animation-fill-mode: forwards;
 }
 
+.centralBlock{
+    position: absolute;
+    left:50vw;
+    transform: translateX(-50%);
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    min-height: 700px;
+    min-width: 500px;
+}
+
 
 body{
     width: 100vw;
     height: 100vh;
     text-align: center;
     font-size: 30px;
-    background: bisque;
-    font-family: 'Franklin Gothic Heavy',serif;
+    background: #f2f3f2;
+    font-family: 'Consolas',serif;
     margin: 0;
     overflow-y: hidden;
+}
+
+@font-face {
+    font-family: cocogoose1;
+    src: url("Cocogoose Pro Light-trial.ttf");
 }

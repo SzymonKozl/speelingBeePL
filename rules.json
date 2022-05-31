@@ -63,10 +63,10 @@
     ]
   },
   "ranks": {
-    "początkujący": 0.0,
-    "odkrywca": 0.2,
-    "średniozaawansowany": 0.4,
-    "ekspert": 0.6,
-    "królowa pszczół": 0.8
+    "POCZĄTKUJĄCY": 0.0,
+    "ODKRYWCA": 0.2,
+    "ŚREDNIOZAAWANSOWANY": 0.4,
+    "EKSPERT": 0.6,
+    "KRÓLOWA PSZCZÓŁ": 0.8
   }
 }
