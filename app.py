@@ -18,7 +18,7 @@ game_data = prepare_game_data(RULES_PATH, WB_METADATA_PATH, WORDBASE_PATH, pangr
 
 @app.route('/')
 def home_page():
-    return render_template('index.html')
+    return render_template('index_v2.html')
 
 
 @app.route('/secret_words/', methods=['GET'])

@@ -116,7 +116,7 @@ function updateRankFrame() {
     for (let i = 1; i <= 5; i++) {
         if (i <= rank) document.getElementById("rank_dot_" + i).style.background = "black";
         else document.getElementById("rank_dot_" + i).style.background = "#f2f3f2";
-        document.getElementById("rank_label").style.top = (-32 + rank * 50) + "px";
+        document.getElementById("rank_label").style.top = (rank * 75 - 50) + "px";
         document.getElementById("rank_label").innerText = rankDesc;
         document.getElementById("counter").innerText = "PUNKTY: " + points;
     }
