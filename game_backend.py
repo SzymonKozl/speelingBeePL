@@ -119,7 +119,6 @@ def prepare_game_data(rules_path: str, md_path: str, wordbase_path: str = 'words
             raise ValueError(
                 f"invalid value of \"mode\" field in rules.json (Value is set to {x}, should be 0, 1 or 2)")
     game_data = init(rules, wordbase_path, **kwargs)
-    print(game_data)
     with open(md_path, 'r') as f_in:
         game_data['wb_meta'] = json.load(f_in)
     return game_data

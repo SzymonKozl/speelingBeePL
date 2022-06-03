@@ -18,13 +18,8 @@ game_data = prepare_game_data(RULES_PATH, WB_METADATA_PATH, WORDBASE_PATH, pangr
 
 @app.route('/')
 def home_page():
-    return render_template('index.html')
-
-
-@app.route('/secret_words/', methods=['GET'])
-def wordlist():
     enc = json.JSONEncoder()
-    return enc.encode(game_data)
+    return render_template('desktop.html', game_data=enc.encode(game_data))
 
 
 if __name__ == '__main__':

@@ -17,13 +17,14 @@ document.onkeydown = function (e) {
     else if (keyLower === centralLetter) clickHex(7);
 }
 
-function initialize() {
+function initialize(gameDataArg) {
     document.getElementById("date_today").innerText = new Date(Date.now()).toLocaleDateString();
     let i;
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "/secret_words/", false); // false for synchronous request
     xmlHttp.send(null);
-    _gameData = JSON.parse(xmlHttp.responseText);
+    //_gameData = JSON.parse(xmlHttp.responseText);
+    _gameData = JSON.parse(gameDataArg)
     const letters_temp = _gameData["game_data"]["letters"];
     centralLetter = _gameData["game_data"]["central_letter"];
     document.getElementById("letter_slot_7").innerText = centralLetter.toUpperCase();
