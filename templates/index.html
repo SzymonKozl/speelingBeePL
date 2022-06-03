@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="../static/style.css">
 <head>
     <meta charset="ANSI">
+    <meta name="keywords" content="Spelling Bee, Pszczoła, Gra">
+    <meta name="description" content="Zagraj w grę Wymowna Pszczoła">
+    <meta name="author" content="Szymon Kozłowski">
+    <meta name="">
     <title>WYMOWNA PSZCZOŁA</title>
 </head>
 <body onload="initialize()">
@@ -10,54 +14,62 @@
             WYMOWNA PSZCZOŁA <span id="date_today"></span>
     </div>
     <br/>
-    <div class="infoButton" onclick="openInfoPopup()">?</div>
+    <div class="v2InfoButton" onclick="openInfoPopup()">?</div>
     <br/>
     <script type="text/javascript" src="{{ url_for('static', filename='js/game.js') }}"></script>
-    <div class="centralBlock">
-        <div class="popup" id="mistake_popup"></div>
-        <div class="hex_black" onclick="clickHex(7)" id="hex7">
-            <div class="buttonLetter" id="letter_slot_7" onclick="clickHex(7)" style="color: #ffcf00"></div>
-        </div>
-        <div class="hex_yellow" onclick="clickHex(1)" style="transform: translate(-3%, 78%)" id="hex1">
-            <div class="buttonLetter" id="letter_slot_1" onclick="clickHex(1)"></div>
-        </div>
-        <div class="hex_yellow" onclick="clickHex(2)" style="transform: translate(-98%, 78%)" id="hex2">
-            <div class="buttonLetter" id="letter_slot_2" onclick="clickHex(2)"></div>
-        </div>
-        <div class="hex_yellow" onclick="clickHex(3)" style="transform: translate(-98%, -78%)" id="hex3">
-            <div class="buttonLetter" id="letter_slot_3" onclick="clickHex(3)"></div>
-        </div>
-        <div class="hex_yellow" onclick="clickHex(4)" style="transform: translate(-2%, -78%)" id="hex4">
-            <div class="buttonLetter" id="letter_slot_4" onclick="clickHex(4)"></div>
-        </div>
-        <div class="hex_yellow" onclick="clickHex(5)" style="transform: translate(44%, 0)" id="hex5">
-            <div class="buttonLetter" id="letter_slot_5" onclick="clickHex(5)"></div>
-        </div>
-        <div class="hex_yellow" onclick="clickHex(6)" style="transform: translate(-145%, 0)" id="hex6">
-            <div class="buttonLetter" id="letter_slot_6" onclick="clickHex(6)"></div>
-        </div>
-        <span id="new_word" style="position: inherit; left: 50%; top: 340px; text-align: center; transform: translate(-50%, 0)"></span>
-        <button class="button" style="top: 40vh; transform: translateX(100%)" onclick="delChar()">USUŃ LITERĘ</button>
-        <button class="button" style="top: 40vh; transform: translateX(-200%)" onclick="handleGuess()">SPRAWDŹ SŁOWO</button>
-        <div class="discoveredWords" id="discovered_words_container">
-            <table style="table-layout: fixed; width: 100%" id="discovered_words"></table>
-        </div>
-    </div>
-    <div class="ranksFrame" style="left: 5vw; top: 10vh">
-        <div class="rankLine" style="top: 50px; left:3.9vw">
-            <div class="rankLabel" id="rank_label" style="left: 2vw"></div>
-            <div class="rankDot" id="rank_dot_1" style="top: 25px; left: -8px"></div>
-            <div class="rankDot" id="rank_dot_2" style="top: 75px; left: -8px"></div>
-            <div class="rankDot" id="rank_dot_3" style="top: 125px; left: -8px"></div>
-            <div class="rankDot" id="rank_dot_4" style="top: 175px; left: -8px"></div>
-            <div class="rankDot" id="rank_dot_5" style="top: 225px; left: -8px"></div>
-        </div>
-    </div>
-    <span id="counter" style="position: absolute; top: 25vh; right: 15vw; font-size: 25px">PUNKTY: 0</span>
-    <div class="popupShadow" id="info_popup_shadow"></div>
-    <div class="infoPopup" id="info_popup">
-        <div class="popupCloseButton" onclick="closeInfoPopup()">x</div>
-        <div class="infoPopupText">
+    <table class="v2MainLayout">
+        <tr>
+            <td style="vertical-align: top">
+                <div class="v2RanksFrame">
+                    <div id="counter" class="v2Counter">PUNKTY: 0</div>
+                    <div class="v2RankLine" style="top: 50px">
+                        <div class="v2RankLabel" id="rank_label" style="left: 2vw"></div>
+                        <div class="v2RankDot" id="rank_dot_1" style="top: 25px"></div>
+                        <div class="v2RankDot" id="rank_dot_2" style="top: 75px"></div>
+                        <div class="v2RankDot" id="rank_dot_3" style="top: 125px"></div>
+                        <div class="v2RankDot" id="rank_dot_4" style="top: 175px"></div>
+                        <div class="v2RankDot" id="rank_dot_5" style="top: 225px"></div>
+                    </div>
+                </div>
+                <button class="v2Button" style="top: 75%; transform: translateX(-125%)" onclick="delChar()">USUŃ LITERĘ</button><br>
+                <button class="v2Button" style="top: 75%; transform: translateX(25%)" onclick="handleGuess()">SPRAWDŹ SŁOWO</button>
+            </td>
+            <td>
+                <div class="v2MiddlePopup" id="mistake_popup"></div>
+                <div class="v2HexBlack" onclick="clickHex(7)" id="hex7">
+                    <div class="v2ButtonLetter" id="letter_slot_7" onclick="clickHex(7)" style="color: #ffcf00"></div>
+                </div>
+                <div class="v2HexYellow" onclick="clickHex(1)" style="transform: translate(-3%, 78%)" id="hex1">
+                    <div class="v2ButtonLetter" id="letter_slot_1" onclick="clickHex(1)"></div>
+                </div>
+                <div class="v2HexYellow" onclick="clickHex(2)" style="transform: translate(-98%, 78%)" id="hex2">
+                    <div class="v2ButtonLetter" id="letter_slot_2" onclick="clickHex(2)"></div>
+                </div>
+                <div class="v2HexYellow" onclick="clickHex(3)" style="transform: translate(-98%, -78%)" id="hex3">
+                    <div class="v2ButtonLetter" id="letter_slot_3" onclick="clickHex(3)"></div>
+                </div>
+                <div class="v2HexYellow" onclick="clickHex(4)" style="transform: translate(-2%, -78%)" id="hex4">
+                    <div class="v2ButtonLetter" id="letter_slot_4" onclick="clickHex(4)"></div>
+                </div>
+                <div class="v2HexYellow" onclick="clickHex(5)" style="transform: translate(44%, 0)" id="hex5">
+                    <div class="v2ButtonLetter" id="letter_slot_5" onclick="clickHex(5)"></div>
+                </div>
+                <div class="v2HexYellow" onclick="clickHex(6)" style="transform: translate(-145%, 0)" id="hex6">
+                    <div class="v2ButtonLetter" id="letter_slot_6" onclick="clickHex(6)"></div>
+                </div>
+                <span id="new_word" style="position: relative; top: 15%; text-align: center; font-size: 40px"></span>
+            </td>
+            <td style="vertical-align: top">
+                <div class="v2DiscoveredWords" id="discovered_words_container">
+                    <table style="table-layout: fixed; width: 100%" id="discovered_words"></table>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="v2PopupShadow" id="info_popup_shadow"></div>
+    <div class="v2InfoPopup" id="info_popup">
+        <div class="v2PopupCloseButton" onclick="closeInfoPopup()">x</div>
+        <div class="v2InfoPopupText">
             Wymowna pszczoła to gra <i>inspirowana</i> Spelling
             Bee ze strony New York Times. Zabawa polega na
             ułożeniu z dostępnych liter jak największej ilości słów.
@@ -69,10 +81,10 @@
             liter, jesteś nagrodzony siedmioma punktami.
         </div>
     </div>
-    <div class="popupBottom" id="bottom_popup">
+    <div class="v2PopupBottom" id="bottom_popup">
         TA STRONA UŻYWA CIASTECZEK :)
-        <img src="../static/cookie.png" alt="File not loaded" style="left: 75%; top: 10px; position: absolute;"/>
-        <div class="popupCloseButton" style="right: 10px; top: 10px; left: revert" onclick="acceptCookies()">X</div>
+        <div class="v2PopupCloseButton" style="right: 10px; top: 10px; left: revert" onclick="acceptCookies()">X</div>
     </div>
+    <img src="../static/hexagons_bg.png" style="left: 0; bottom: 0; position: absolute; z-index: -1" alt="File not loaded">
 </body>
 </html>

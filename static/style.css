@@ -1,31 +1,88 @@
-/* Naming conventions:
-classes used for applying animation should have names starting with "animHold" prefix
-*/
+.v2MainLayout{
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    margin: 0;
+}
 
-.hex_black {
-    height: 100px;
-    width: 100px;
+.v2Counter{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+}
+
+.v2RankLine {
+    background: black;
+    height: 400px;
+    width: 7px;
+    border-radius: 3px;
+    position: inherit;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.v2RankDot {
+    position: inherit;
+    border-radius: 50%;
+    border: 5px solid black;
+    background: #f2f3f2;
+    width: 15px;
+    height: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.v2RanksFrame{
+    position: relative;
+    top: 5%;
+    width: 100%;
+    height: fit-content;
+}
+
+.v2RankLabel {
+    font-family: "Consolas", serif;
+    font-size: 25px;
+    position: absolute;
+    width: 200px;
+}
+
+.v2Button {
+    cursor: pointer;
+    position: absolute;
+    background-color: #ff7435;
+    border-radius: 10px;
+    font-size: 19px;
+    width: 150px;
+    height: 75px;
+    font-family: 'Consolas', serif;
+    border: 0;
+}
+
+.v2HexBlack {
+    height: 150px;
+    width: 150px;
     background: black;
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-    position: inherit;
+    position: absolute;
     transform: translateX(-50%);
     left: 50%;
-    top: 20%;
+    top: 40%;
 }
 
-.hex_yellow {
-    height: 100px;
-    width: 100px;
+.v2HexYellow {
+    height: 150px;
+    width: 150px;
     background: #ffcf00;
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-    position: inherit;
+    position: absolute;
     left: 50%;
-    top: 20%;
+    top: 40%;
 }
 
-.buttonLetter {
+.v2ButtonLetter {
     position: inherit;
     color: black;
     -webkit-touch-callout: none;
@@ -34,157 +91,60 @@ classes used for applying animation should have names starting with "animHold" p
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-size: 40px;
-    width: 50px;
-    height: 50px;
-    top: 25px;
-    left: 25px;
+    font-size: 60px;
+    width: 70px;
+    height: 70px;
+    top: 40px;
+    left: 40px;
     font-family: cocogoose1, sans-serif;
 }
 
-.discoveredWords {
-    overflow: scroll;
+.v2DiscoveredWords {
+    overflow-y: auto;
     overflow-x: hidden;
-    scrollbar-base-color: yellow;
     scroll-behavior: smooth;
     scroll-padding-bottom: unset;
     background: lightgrey;
-    position: inherit;
-    top: 50vh;
+    position: relative;
+    top: 40%;
     font-size: 20px;
-    width: 30vw;
-    transform: translateX(-50%);
+    width: 90%;
+    transform: translate(-50%, -50%);
     left: 50%;
     border: 0;
     border-radius: 10px;
-    height: 15vh;
+    height: 50%;
     min-height: 100px;
-    min-width: 400px;
+    min-width: 250px;
 }
 
-.button {
-    cursor: pointer;
-    position: inherit;
-    background-color: orange;
-    border-radius: 10px;
-    font-size: 19px;
-    width: 150px;
-    height: 75px;
-    font-family: 'Consolas', serif;
-    border: 0;
-    left: 50%
+.v2DiscoveredWords::-webkit-scrollbar-track{
+    background: lightgray;
 }
 
-.popup {
-    font-size: 25px;
+.v2DiscoveredWords::-webkit-scrollbar{
+    width: 8px;
+}
+
+.v2DiscoveredWords::-webkit-scrollbar-thumb{
+    background: gray;
+}
+
+.v2MiddlePopup {
+    font-size: 30px;
     font-family: Consolas, serif;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.3);
-    width: 20vw;
-    height: fit-content;
-    border-radius: 5px;
-    position: inherit;
+    background: rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    height: 45px;
+    border-radius: 2px;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    top: 150px;
 }
 
-@keyframes appear {
-    0% {
-        opacity: 0
-    }
-    20% {
-        opacity: 1
-    }
-    80% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0
-    }
-}
-
-.animHoldMiddlePopup {
-    animation-duration: 2s;
-    animation-name: appear;
-    animation-delay: 0s;
-    animation-fill-mode: forwards;
-}
-
-.ranksFrame {
-    color: black;
-    width: 10vw;
-    height: 500px;
-    position: absolute;
-}
-
-.rankDot {
-    position: inherit;
-    border-radius: 50%;
-    border: 5px solid black;
-    background: #f2f3f2;
-    width: 15px;
-    height: 15px;
-}
-
-.rankLine {
-    background: black;
-    height: 300px;
-    width: 10px;
-    border-radius: 5px;
-    position: inherit;
-}
-
-.rankLabel {
-    font-family: "Consolas", serif;
-    font-size: 25px;
-    position: inherit;
-}
-
-.infoPopup {
-    line-height: 50px;
-    width: 70vw;
-    height: 50vh;
-    position: absolute;
-    top: 5vh;
-    left: 5vw;
-    background: #ffcf00;
-    border-radius: 5vh;
-    font-family: "Consolas", serif;
-    font-size: 30px;
-    display: None;
-    z-index: 100;
-    text-align: center;
-    padding: 10%;
-}
-
-.infoPopupText{
-    position: inherit;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50%;
-    height: fit-content;
-}
-
-.popupCloseButton {
-    width: 30px;
-    height: 30px;
-    font-family: Consolas, serif;
-    font-weight: bolder;
-    color: black;
-    cursor: pointer;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    position: inherit;
-    display: inherit;
-    top: 3vh;
-    left: 82vw;
-}
-
-.infoButton {
+.v2InfoButton {
     width: 30px;
     height: 30px;
     font-family: Consolas, serif;
@@ -203,7 +163,7 @@ classes used for applying animation should have names starting with "animHold" p
     left: 95vw;
 }
 
-.popupShadow {
+.v2PopupShadow {
     width: 100vw;
     height: 100vh;
     opacity: 0.5;
@@ -214,15 +174,51 @@ classes used for applying animation should have names starting with "animHold" p
     top: 0;
 }
 
-.standardContent {
-    -webkit-touch-callout: default;
-    -webkit-user-select: auto;
-    -khtml-user-select: auto;
-    -moz-user-select: auto;
-    -ms-user-select: auto;
+.v2InfoPopup {
+    line-height: 50px;
+    width: 70vw;
+    height: 50vh;
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    background: #ffcf00;
+    border-radius: 5vh;
+    font-family: "Consolas", serif;
+    font-size: 30px;
+    display: None;
+    z-index: 100;
+    text-align: center;
+    padding: 10%;
 }
 
-.popupBottom {
+.v2InfoPopupText{
+    position: inherit;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+    height: fit-content;
+}
+
+.v2PopupCloseButton {
+    width: 30px;
+    height: 30px;
+    font-family: Consolas, serif;
+    font-weight: bolder;
+    color: black;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    position: inherit;
+    display: inherit;
+    top: 3vh;
+    left: 82vw;
+}
+
+.v2PopupBottom {
     width: 100vw;
     height: 50px;
     left: 0;
@@ -233,7 +229,7 @@ classes used for applying animation should have names starting with "animHold" p
     padding-top: 10px;
 }
 
-@keyframes showBottomPopup {
+@keyframes v2ShowBottomPopup {
     from {
         bottom: -65px;
     }
@@ -242,7 +238,7 @@ classes used for applying animation should have names starting with "animHold" p
     }
 }
 
-@keyframes hideBottomPopup {
+@keyframes v2HideBottomPopup {
     from {
         bottom: 0;
     }
@@ -251,31 +247,19 @@ classes used for applying animation should have names starting with "animHold" p
     }
 }
 
-.animHoldPopupBottomShow{
+.v2AnimHoldPopupBottomShow{
     animation-duration: 0.75s;
-    animation-name: showBottomPopup;
+    animation-name: v2ShowBottomPopup;
     animation-delay: 0s;
     animation-fill-mode: forwards;
 }
 
-.animHoldPopupBottomHide{
+.v2AnimHoldPopupBottomHide{
     animation-duration: 0.75s;
-    animation-name: hideBottomPopup;
+    animation-name: v2HideBottomPopup;
     animation-delay: 0s;
     animation-fill-mode: forwards;
 }
-
-.centralBlock{
-    position: absolute;
-    left:50vw;
-    transform: translateX(-50%);
-    width: fit-content;
-    height: fit-content;
-    text-align: center;
-    min-height: 700px;
-    min-width: 500px;
-}
-
 
 body{
     width: 100vw;
@@ -291,4 +275,26 @@ body{
 @font-face {
     font-family: cocogoose1;
     src: url("Cocogoose Pro Light-trial.ttf");
+}
+
+@keyframes v2MidPopupAppear {
+    0% {
+        opacity: 0
+    }
+    20% {
+        opacity: 1
+    }
+    80% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+.v2AnimHoldMiddlePopup {
+    animation-duration: 2s;
+    animation-name: v2MidPopupAppear;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
 }

@@ -109,7 +109,7 @@ function delChar() {
 
 function displayMiddlePopup(content) {
     document.getElementById("mistake_popup").innerText = content;
-    playCSSAnimation("mistake_popup", "animHoldMiddlePopup", true);
+    playCSSAnimation("mistake_popup", "v2AnimHoldMiddlePopup", true);
 }
 
 function updateRankFrame() {
@@ -155,7 +155,7 @@ function loadGame() {
         updateWordList();
     }
     if (cookies['cookies'] === undefined) {
-        playCSSAnimation("bottom_popup", "animHoldPopupBottomShow")
+        playCSSAnimation("bottom_popup", "v2AnimHoldPopupBottomShow")
     }
 }
 
@@ -208,7 +208,7 @@ function acceptCookies() {
     jsonObj["accepted_cookies"] = true;
     const expirationDate = new Date(2200, 1, 1);
     document.cookie = "cookies=" + JSON.stringify(jsonObj) + "; expires=" + expirationDate;
-    playCSSAnimation("bottom_popup", "animHoldPopupBottomHide")
+    playCSSAnimation("bottom_popup", "v2AnimHoldPopupBottomHide")
 }
 
 
