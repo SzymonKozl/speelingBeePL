@@ -1,3 +1,4 @@
+import datetime
 import json
 import random
 from typing import List, Set, Callable
@@ -121,4 +122,6 @@ def prepare_game_data(rules_path: str, md_path: str, wordbase_path: str = 'words
     game_data = init(rules, wordbase_path, **kwargs)
     with open(md_path, 'r') as f_in:
         game_data['wb_meta'] = json.load(f_in)
+    d = datetime.date.today()
+    game_data['date'] = d.__format__("%Y.%m.%d")
     return game_data

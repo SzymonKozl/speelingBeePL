@@ -8,6 +8,7 @@ const ranks = new Map();
 let rank = 1;
 let rankDesc = "";
 let _gameData;
+let gameDate;
 
 document.onkeydown = function (e) {
     let keyLower = e.key.toLowerCase();
@@ -18,8 +19,9 @@ document.onkeydown = function (e) {
 }
 
 function initialize(gameDataArg) {
-    document.getElementById("date_today").innerText = new Date(Date.now()).toLocaleDateString();
     _gameData = JSON.parse(gameDataArg)
+    gameDate = new Date(_gameData["date"]);
+    document.getElementById("date_today").innerText = _gameData["date"]
     const letters_temp = _gameData["game_data"]["letters"];
     centralLetter = _gameData["game_data"]["central_letter"];
     document.getElementById("letter_slot_7").innerText = centralLetter.toUpperCase();
@@ -130,12 +132,16 @@ function evaluateRank() {
 }
 
 function saveScore() {
-    const jObj = {};
-    jObj["score"] = points;
-    jObj["words"] = discovered
     const expirationDate = new Date(new Date(Date.now()).toLocaleDateString("en-US"));
-    expirationDate.setDate(expirationDate.getDate() + 1);
-    document.cookie = "gameData=" + JSON.stringify(jObj) + "; expires=" + expirationDate;
+    if (expirationDate.getTime() === gameDate.getTime()) {
+        const jObj = {};
+        jObj["score"] = points;
+        jObj["words"] = discovered
+        expirationDate.setDate(expirationDate.getDate() + 1);
+        const s = expirationDate.toString();
+        document.cookie = "gameData=" + JSON.stringify(jObj) + "; expires=" + s.replace("Z", "CET");
+    }
+    else console.warn("progress is not saved as you are playing on yesterday's data")
 }
 
 function loadGame() {
