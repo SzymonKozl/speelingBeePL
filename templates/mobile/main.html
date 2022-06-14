@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 {% extends "layouts/default.html" %}
 {% block content %}
-<body onload='initialize({{ game_data|tojson|safe }}, true)' style="font-size: 50px; overflow-y: hidden">
+    <body onload='initialize({{ game_data|tojson|safe }}, true)' style="font-size: 50px; overflow-y: hidden">
     <link rel="stylesheet" href="../../static/styles/mobile/mobile_style.css">
     <script src="../../static/js/mobile/mobile.js"></script>
     <div style="width: 100%; height: 120px; background: #ffcf00; line-height: 100px; vertical-align: center">
-            <div style="position: absolute; left: 45%; transform: translateX(-50%); width: fit-content">WYMOWNA PSZCZOŁA <span id="date_today"></span></div>
+        <div style="position: absolute; left: 45%; transform: translateX(-50%); width: fit-content">WYMOWNA PSZCZOŁA
+            <span id="date_today"></span></div>
     </div>
     <br/>
     <div class="v2InfoButton" style="left: 10px; top: 15px" onclick="openInfoPopup()">?</div>
-    <div class="mobileDiscoveredButton" style="right: 10px; top: 10px"><img src="../../static/bar_bttn.png"  alt="err" style="transform: scale(0.8, 0.8)" onclick="onWordListClick()"></div>
+    <div class="mobileDiscoveredButton" style="right: 10px; top: 10px"><img src="../../static/bar_bttn.png" alt="err"
+                                                                            style="transform: scale(0.8, 0.8)"
+                                                                            onclick="onWordListClick()"></div>
     <div class="mobileRankFrame">
         <table style="table-layout: fixed; width: 100%; text-align: center; position: absolute; top: 10vh">
             <tr>
@@ -22,15 +25,21 @@
             </tr>
         </table>
         <div class="mobileRankLine">
-            <div class="mobileRankDot" id="rank_dot_1" style="transform: translate(-50%, -45%) translateX(-200px)"></div>
-            <div class="mobileRankDot" id="rank_dot_2" style="transform: translate(-50%, -45%) translateX(-100px)"></div>
+            <div class="mobileRankDot" id="rank_dot_1"
+                 style="transform: translate(-50%, -45%) translateX(-200px)"></div>
+            <div class="mobileRankDot" id="rank_dot_2"
+                 style="transform: translate(-50%, -45%) translateX(-100px)"></div>
             <div class="mobileRankDot" id="rank_dot_3" style="transform: translate(-50%, -45%)"></div>
             <div class="mobileRankDot" id="rank_dot_4" style="transform: translate(-50%, -45%) translateX(100px)"></div>
             <div class="mobileRankDot" id="rank_dot_5" style="transform: translate(-50%, -45%) translateX(200px)"></div>
         </div>
     </div>
-    <button class="v2Button" style="bottom: 20%; left: 50%; font-size: 38px; transform: translateX(-125%)" onclick="delChar()">USUŃ LITERĘ</button>
-    <button class="v2Button" style="bottom: 20%; left: 50%; font-size: 38px; transform: translateX(25%)" onclick="handleGuess()">SPRAWDŹ SŁOWO</button>
+    <button class="v2Button" style="bottom: 20%; left: 50%; font-size: 38px; transform: translateX(-125%)"
+            onclick="delChar()">USUŃ LITERĘ
+    </button>
+    <button class="v2Button" style="bottom: 20%; left: 50%; font-size: 38px; transform: translateX(25%)"
+            onclick="handleGuess()">SPRAWDŹ SŁOWO
+    </button>
     <div>
         <div class="mobileMiddlePopup" id="mistake_popup"></div>
         <div class="mobileHexBlack" onclick="clickHex(7)" id="hex7">
@@ -55,12 +64,17 @@
             <div class="v2ButtonLetter" id="letter_slot_6" style="font-size: 80px"></div>
         </div>
     </div>
-    <span id="new_word" style="position: absolute; top: 67%; text-align: center; font-size: 80px; left: 50%; transform: translateX(-50%)"></span>
+    <span id="new_word"
+          style="position: absolute; top: 67%; text-align: center; font-size: 80px; left: 50%; transform: translateX(-50%)"></span>
     <div class="v2PopupShadow" id="info_popup_shadow"></div>
     <div class="v2InfoPopup" id="info_popup">
         <div class="v2PopupCloseButton" onclick="closeInfoPopup()">x</div>
         <div class="v2InfoPopupText" style="width: calc(100% - 2em); left: 0">
-            Wymowna pszczoła to gra <i>inspirowana</i> Spelling Bee ze strony New York Times. Zabawa polega na ułożeniu z dostępnych liter jak największej ilości słów. Pamiętaj, że w kazdym słowie musisz użyć litery ze środkowego sześciokąta oraz że ułożone słowa nie mogą być krótsze niż 4. Za słowo o długości 4 otrzymujesz 1 punkt. Za dłuższe - tyle ile liter ma słowo. Dodatkowo, jeśli słowo zawiera wszystkie z dostępnych liter, jesteś nagrodzony siedmioma punktami.
+            Wymowna pszczoła to gra <i>inspirowana</i> Spelling Bee ze strony New York Times. Zabawa polega na ułożeniu
+            z dostępnych liter jak największej ilości słów. Pamiętaj, że w kazdym słowie musisz użyć litery ze
+            środkowego sześciokąta oraz że ułożone słowa nie mogą być krótsze niż 4. Za słowo o długości 4 otrzymujesz 1
+            punkt. Za dłuższe - tyle ile liter ma słowo. Dodatkowo, jeśli słowo zawiera wszystkie z dostępnych liter,
+            jesteś nagrodzony siedmioma punktami.
         </div>
     </div>
     <div class="mobileDiscoveredHolder" id="discovered_words_container">
@@ -70,5 +84,5 @@
         TA STRONA UŻYWA CIASTECZEK :)
         <div class="v2PopupCloseButton" style="right: 10px; top: 10px; left: revert" onclick="acceptCookies()">X</div>
     </div>
-</body>
+    </body>
 {% endblock %}

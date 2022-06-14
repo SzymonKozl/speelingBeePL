@@ -1,5 +1,5 @@
 // mobile-webpage-only logic
-function onWordListClick(){
+function onWordListClick() {
     const el = document.getElementById("discovered_words_container");
     if (el.style.animationDirection === "normal") el.style.animationDirection = "reverse";
     else el.style.animationDirection = "normal";
