@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-{% extends "layouts/main.html" %}
+{% extends "layouts/default.html" %}
 {% block content %}
-<body onload='initialize({{ game_data|tojson|safe }})'>
+    <body onload='initialize({{ game_data|tojson|safe }}, false)'>
     <div style="width: 100%; height: 50px; background: #ffcf00; line-height: 50px">
-            WYMOWNA PSZCZOŁA <span id="date_today"></span>
+        WYMOWNA PSZCZOŁA <span id="date_today"></span>
     </div>
     <br/>
     <div class="v2InfoButton" onclick="openInfoPopup()">?</div>
@@ -22,8 +22,13 @@
                         <div class="v2RankDot" id="rank_dot_5" style="top: 225px"></div>
                     </div>
                 </div>
-                <button class="v2Button" style="top: 75%; transform: translateX(-125%)" onclick="delChar()">USUŃ LITERĘ</button><br>
-                <button class="v2Button" style="top: 75%; transform: translateX(25%)" onclick="handleGuess()">SPRAWDŹ SŁOWO</button>
+                <button class="v2Button" style="top: 75%; transform: translateX(-125%)" onclick="delChar()">USUŃ
+                    LITERĘ
+                </button>
+                <br>
+                <button class="v2Button" style="top: 75%; transform: translateX(25%)" onclick="handleGuess()">SPRAWDŹ
+                    SŁOWO
+                </button>
             </td>
             <td>
                 <div class="v2MiddlePopup" id="mistake_popup"></div>
@@ -48,7 +53,7 @@
                 <div class="v2HexYellow" onclick="clickHex(6)" style="transform: translate(-145%, 0)" id="hex6">
                     <div class="v2ButtonLetter" id="letter_slot_6"></div>
                 </div>
-                <span id="new_word" style="position: relative; top: 15%; text-align: center; font-size: 40px"></span>
+                <span id="new_word" style="position: absolute; top: 70%; text-align: center; font-size: 40px; left: 50%; transform: translateX(-50%)"></span>
             </td>
             <td style="vertical-align: top">
                 <div class="v2DiscoveredWords" id="discovered_words_container">
@@ -76,6 +81,7 @@
         TA STRONA UŻYWA CIASTECZEK :)
         <div class="v2PopupCloseButton" style="right: 10px; top: 10px; left: revert" onclick="acceptCookies()">X</div>
     </div>
-    <img src="../static/hexagons_bg.png" style="left: 0; bottom: 0; position: absolute; z-index: -1" alt="File not loaded">
-</body>
+    <img src="../static/hexagons_bg.png" style="left: 0; bottom: 0; position: absolute; z-index: -1"
+         alt="File not loaded">
+    </body>
 {% endblock %}

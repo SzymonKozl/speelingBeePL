@@ -1,11 +1,11 @@
-.v2MainLayout{
+.v2MainLayout {
     width: 100%;
     height: 100%;
     table-layout: fixed;
     margin: 0;
 }
 
-.v2Counter{
+.v2Counter {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -33,7 +33,7 @@
     transform: translateX(-50%);
 }
 
-.v2RanksFrame{
+.v2RanksFrame {
     position: relative;
     top: 5%;
     width: 100%;
@@ -50,23 +50,30 @@
 .v2Button {
     cursor: pointer;
     position: absolute;
-    background-color: #ff7435;
+    background-color: #ef8354;
     border-radius: 10px;
     font-size: 19px;
-    width: 150px;
-    height: 75px;
+    width: 9em;
+    height: 3.5em;
     font-family: 'Consolas', serif;
     border: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .v2HexBlack {
     height: 150px;
     width: 150px;
     background: black;
+    transform: translateX(-50%);
+    color: #ffcf00;
     -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
     position: absolute;
-    transform: translateX(-50%);
     left: 50%;
     top: 40%;
 }
@@ -92,10 +99,11 @@
     -ms-user-select: none;
     user-select: none;
     font-size: 60px;
-    width: 70px;
-    height: 70px;
-    top: 40px;
-    left: 40px;
+    width: 1.1em;
+    height: 1.1em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-family: cocogoose1, sans-serif;
 }
 
@@ -114,19 +122,19 @@
     border: 0;
     border-radius: 10px;
     height: 50%;
-    min-height: 100px;
+    min-height: 400px;
     min-width: 250px;
 }
 
-.v2DiscoveredWords::-webkit-scrollbar-track{
+.v2DiscoveredWords::-webkit-scrollbar-track {
     background: lightgray;
 }
 
-.v2DiscoveredWords::-webkit-scrollbar{
+.v2DiscoveredWords::-webkit-scrollbar {
     width: 8px;
 }
 
-.v2DiscoveredWords::-webkit-scrollbar-thumb{
+.v2DiscoveredWords::-webkit-scrollbar-thumb {
     background: gray;
 }
 
@@ -147,7 +155,7 @@
 .v2InfoButton {
     width: 30px;
     height: 30px;
-    font-family: Consolas, serif;
+    font-family: "Agency FB", serif;
     font-weight: bolder;
     color: black;
     border-radius: 50%;
@@ -168,7 +176,7 @@
     height: 100vh;
     opacity: 0.5;
     background: grey;
-    display: none;
+    visibility: hidden;
     position: absolute;
     left: 0;
     top: 0;
@@ -182,22 +190,25 @@
     top: 5vh;
     left: 5vw;
     background: #ffcf00;
-    border-radius: 5vh;
+    border-radius: 15px;
     font-family: "Consolas", serif;
     font-size: 30px;
-    display: None;
+    visibility: hidden;
     z-index: 100;
     text-align: center;
     padding: 10%;
 }
 
-.v2InfoPopupText{
+.v2InfoPopupText {
+    margin: 1em;
     position: inherit;
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
     width: 50%;
     height: fit-content;
+    text-align: justify;
+    overflow-wrap: normal;
 }
 
 .v2PopupCloseButton {
@@ -214,6 +225,7 @@
     -ms-user-select: none;
     position: inherit;
     display: inherit;
+    visibility: inherit;
     top: 3vh;
     left: 82vw;
 }
@@ -222,7 +234,7 @@
     width: 100vw;
     height: 50px;
     left: 0;
-    bottom: -65px;
+    top: 100%;
     background: gray;
     position: absolute;
     padding-bottom: 5px;
@@ -231,50 +243,57 @@
 
 @keyframes v2ShowBottomPopup {
     from {
-        bottom: -65px;
+        transform: none;
     }
     to {
-        bottom: 0;
+        transform: translateY(-100%);
     }
 }
 
 @keyframes v2HideBottomPopup {
     from {
-        bottom: 0;
+        transform: translateY(-100%);
     }
     to {
-        bottom: -65px;
+        transform: none;
     }
 }
 
-.v2AnimHoldPopupBottomShow{
+.v2AnimHoldPopupBottomShow {
     animation-duration: 0.75s;
     animation-name: v2ShowBottomPopup;
     animation-delay: 0s;
     animation-fill-mode: forwards;
 }
 
-.v2AnimHoldPopupBottomHide{
+.v2AnimHoldPopupBottomHide {
     animation-duration: 0.75s;
     animation-name: v2HideBottomPopup;
     animation-delay: 0s;
     animation-fill-mode: forwards;
 }
 
-body{
-    width: 100vw;
-    height: 100vh;
+body {
+    width: 100%;
+    height: 100%;
     text-align: center;
     font-size: 30px;
     background: #f2f3f2;
-    font-family: 'Consolas',serif;
+    font-family: 'Consolas', serif;
     margin: 0;
-    overflow-y: hidden;
+    overflow: hidden;
+    overscroll-behavior-y: none;
+}
+
+html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
 @font-face {
     font-family: cocogoose1;
-    src: url("Cocogoose Pro Light-trial.ttf");
+    src: url("../Cocogoose Pro Light-trial.ttf");
 }
 
 @keyframes v2MidPopupAppear {

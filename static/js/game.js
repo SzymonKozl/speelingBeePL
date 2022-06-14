@@ -18,10 +18,11 @@ document.onkeydown = function (e) {
     else if (keyLower === centralLetter) clickHex(7);
 }
 
-function initialize(gameDataArg) {
+function initialize(gameDataArg, mobile) {
     _gameData = JSON.parse(gameDataArg)
     gameDate = new Date(_gameData["date"]);
-    document.getElementById("date_today").innerText = _gameData["date"]
+    if (!mobile) document.getElementById("date_today").innerText = _gameData["date"];
+    else document.getElementById("date_today").innerText = _gameData["date"].substr(2);
     const letters_temp = _gameData["game_data"]["letters"];
     centralLetter = _gameData["game_data"]["central_letter"];
     document.getElementById("letter_slot_7").innerText = centralLetter.toUpperCase();
@@ -140,8 +141,7 @@ function saveScore() {
         expirationDate.setDate(expirationDate.getDate() + 1);
         const s = expirationDate.toString();
         document.cookie = "gameData=" + JSON.stringify(jObj) + "; expires=" + s.replace("Z", "CET");
-    }
-    else console.warn("progress is not saved as you are playing on yesterday's data")
+    } else console.warn("progress is not saved as you are playing on yesterday's data")
 }
 
 function loadGame() {
@@ -178,13 +178,13 @@ function updateWordList() {
 }
 
 function openInfoPopup() {
-    document.getElementById("info_popup").style.display = "revert";
-    document.getElementById("info_popup_shadow").style.display = "revert";
+    document.getElementById("info_popup").style.visibility = "visible";
+    document.getElementById("info_popup_shadow").style.visibility = "visible";
 }
 
 function closeInfoPopup() {
-    document.getElementById("info_popup").style.display = "none";
-    document.getElementById("info_popup_shadow").style.display = "none";
+    document.getElementById("info_popup").style.visibility = "hidden";
+    document.getElementById("info_popup_shadow").style.visibility = "hidden";
 }
 
 function playCSSAnimation(objectID, CSSAnimationName, removeClass = false) {

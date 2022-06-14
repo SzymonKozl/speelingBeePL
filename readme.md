@@ -48,3 +48,5 @@ longer than 4 characters and includes letter placed in central hexagon player ge
         "królowa pszczół": 0.8
       }
       ```
+## Credits:
+Special thanks to sjp.pl for making their polish words with formations dataset available (https://sjp.pl/sl/odmiany/)

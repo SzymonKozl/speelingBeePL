@@ -60,7 +60,7 @@ def initialize_game_random(rules: dict, wordbase_path: str, **kwargs) -> dict:
     return game_specific(letters, cl, rules, wordbase_path)
 
 
-def initialize_game_random_pangram(rules: dict, wordbase_path: str, pangrams_path: str = "pangrams_rare.txt", **kwargs)\
+def initialize_game_random_pangram(rules: dict, wordbase_path: str, pangrams_path: str = "pangrams_rare.txt", **kwargs) \
         -> dict:
     central_candidates = set(rules["letter_groups"]["vowels_1"] + rules["letter_groups"]["consonants_1"])
     with open(pangrams_path, 'r') as pangrams:
