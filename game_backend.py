@@ -63,7 +63,7 @@ def initialize_game_random(rules: dict, wordbase_path: str, **kwargs) -> dict:
 def initialize_game_random_pangram(rules: dict, wordbase_path: str, pangrams_path: str = "pangrams_rare.txt", **kwargs) \
         -> dict:
     central_candidates = set(rules["letter_groups"]["vowels_1"] + rules["letter_groups"]["consonants_1"])
-    with open(pangrams_path, 'r') as pangrams:
+    with open(pangrams_path, 'r', encoding="cp1250") as pangrams:
         w = [p[:-1] if p.endswith('\n') else p for p in pangrams]
     central_letter = None
     letters = None
@@ -114,16 +114,15 @@ def prepare_game_data(rules_path: str, md_path: str, wordbase_path: str = 'words
     :return: dict containing all game data
     """
     rules = load_rules_config(rules_path)
-    match rules["mode"]:
-        case 0:
-            init = initialize_game_random_pangram
-        case 1:
-            init = initialize_game_random
-        case 2:
-            init = initialize_game_custom
-        case _ as x:
-            raise ValueError(
-                f"invalid value of \"mode\" field in rules.json (Value is set to {x}, should be 0, 1 or 2)")
+    if  rules["mode"] == 0:
+        init = initialize_game_random_pangram
+    elif rules["mode"] == 1:
+        init = initialize_game_random
+    elif rules["mode"] == 2:
+        init = initialize_game_custom
+    else:
+        raise ValueError(
+            f"invalid value of \"mode\" field in rules.json (Value is set to {rules['mode']}, should be 0, 1 or 2)")
     game_data = init(rules, wordbase_path, **kwargs)
     with open(md_path, 'r') as f_in:
         game_data['wb_meta'] = json.load(f_in)
