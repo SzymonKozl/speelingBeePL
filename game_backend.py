@@ -18,7 +18,7 @@ def load_rules_config(path: str = 'rules.json') -> dict:
 
 def filter_words(letters: Set[str], central_letter: str, rules: dict, path: str) -> List[str]:
     final_list = []
-    with open(path, 'r', encoding='ANSI') as f_in:
+    with open(path, 'r', encoding='cp1250') as f_in:
         for line in f_in.readlines():
             w = line[:-1] if line.endswith('\n') else line
             if central_letter in w and set(w).issubset(letters) and len(w) >= rules["minimal_guess_length"]:
@@ -89,10 +89,15 @@ def value_word(word: str, game_data: dict) -> int:
     :param game_data: set of game rules and game context
     :return: reward
     """
+    reward = 0
 
+    if len(set(word)) == 7:
+        reward += game_data["rules"]["reward_pangrams"]
     if str(len(word)) in game_data["rules"]["custom_rewards"].keys():
-        return game_data["rules"]["custom_rewards"][str(len(word))]
-    return len(word)
+        reward += game_data["rules"]["custom_rewards"][str(len(word))]
+    else:
+        reward += len(word)
+    return reward
 
 
 def calc_max_points(words: List[str], game_data: dict) -> int:

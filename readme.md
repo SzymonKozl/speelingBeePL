@@ -16,6 +16,7 @@ longer than 4 characters and includes letter placed in central hexagon player ge
     * 2 - custom chosen letters, specified by "fixed_letters_config" field in rules.json file
 * minimal_guess_length: minimal acceptable length of guess ( technically can be any positive integer, but in dataset
   there are only words with minimal length 4; numbers greater than 7 might also be incompatible with mode 0)
+* reward_pangrams: additional points earned by guessing pangram (word containing all seven possible letters)
 * custom_rewards:
     * specifies custom number of points player receives for guess with length n (default is n)
     * example: ```"custom_rewards": {

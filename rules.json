@@ -12,6 +12,7 @@
     "central_letter": "p"
   },
   "minimal_guess_length": 4,
+  "reward_pangrams": 7,
   "custom_rewards": {
     "4": 1
   },
